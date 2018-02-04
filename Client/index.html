@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+   <head>
+      <link href="./style.css" rel="stylesheet" type="text/css" />
+      <script src = "./angular.min.js"></script>
+   </head>
+   
+   <body ng-app="incidentApp">
+      <div class="incident-wrapper" ng-controller = "IncidentController" >
+         <h2><span class="emphasis">{{basic.title}} MAIN PAGE ({{getTotalIncidents()}})</span></h2>
+
+         <ul>
+            <li ng-repeat="incident in incidents">
+              <span class="gravity-{{incident.gravity}}">{{incident.text}}</span>
+            </li>
+         </ul>
+
+       <form>
+         <input class="add-input" placeholder="Incident" type="text" ng-model="formIncidentsText" ng-model-instant />
+
+         <select class="add-select" ng-model="formIncidentsGravity" ng-options="gravity for gravity in gravityName">{{gravity}}</select>
+         <button class="add-btn" ng-click="addIncident()"><h2>Add Accident</h2></button>
+        </form>
+      
+        <button class="clear-btn" ng-click="clearCompleted()">Clear Accidents list</button>
+    </div>
+  </body>
+
+      </div>
+      
+      <script>
+         angular.module("incidentApp", [])
+         
+         .controller("IncidentController", function($scope) {
+            $scope.basic = {};
+            $scope.basic.title = "INCIDENTS";
+            $scope.formAccidentsText = '';
+            $scope.formAccidentsGravity = '';
+            $scope.gravityName = ["Faible", "Eleve", "Mortelle"];
+            $scope.incidents = [
+            {text:'Valbonne : 27 rue de l\'exemple', gravity:3},         
+            {text:'Nice : 15 rue de l\'exemple', gravity:2} ];
+             // Add incident function
+             $scope.addIncident = function () {
+              $scope.incidents.push({text:$scope.formIncidentsText, gravity:$scope.formIncidentsGravity});
+              $scope.formIncidentsText = '';
+              $scope.formIncidentsGravity = '';
+              // Mongo ?
+            };
+            // Total length of incidents list
+            $scope.getTotalIncidents = function () {
+              return $scope.incidents.length;
+            };
+            // Clear actual list
+            $scope.clearCompleted = function () {
+                $scope.incidents = [];
+                }
+         });
+      </script>
+      
+   </body>
+</html>
