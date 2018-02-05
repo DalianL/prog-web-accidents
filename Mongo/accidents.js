@@ -1,9 +1,12 @@
-var fs = require('fs');
+
+
+/*var fs = require('fs');
 var MongoClient = require('mongodb').MongoClient;
 
 (function main() {
     console.info('populating db with department and region data...');
-    fs.readFile(process.argv[2], populate);//rempli la base de données
+    //fs.readFile(process.argv[2], populate);//rempli la base de données
+
 }());
 
 function createCollection(){
@@ -70,4 +73,4 @@ function jsonifyDepts(depts) {
         }
     }
     return lst;
-}
+}*/
