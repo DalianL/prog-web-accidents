@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^2.2.34"
+    "mongodb": "^2.2.34",
+    "papaparse": "^4.3.6"
   }
 }
