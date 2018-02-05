@@ -2,14 +2,10 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
-
-var db
-
-
 var fs = require('fs');
 
 
-MongoClient.connect('mongodb://localhost:27017/mongo', (err, database) => {
+MongoClient.connect('mongodb://localhost:27017/admin', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 8000, () => {
