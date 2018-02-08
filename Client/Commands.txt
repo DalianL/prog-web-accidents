@@ -1,0 +1,2 @@
+Run the project : ionic serve -l
+Run on Android : ionic cordova run android
