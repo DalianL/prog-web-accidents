@@ -3,7 +3,7 @@ var update = document.getElementById('update')
 var del = document.getElementById('delete')
 
 update.addEventListener('click', function () {
-  fetch('quotes', {
+  fetch('accidents', {
     method: 'put',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -20,7 +20,7 @@ update.addEventListener('click', function () {
 })
 
 del.addEventListener('click', function () {
-  fetch('quotes', {
+  fetch('accidents', {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json'

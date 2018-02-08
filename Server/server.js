@@ -4,12 +4,12 @@ const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 var fs = require('fs');
 
-
-MongoClient.connect('mongodb://localhost:27017/admin', (err, database) => {
+MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 8000, () => {
     console.log('listening on 8000')
+    console.log('results ok, ready for routing...');
   })
 })
 
@@ -19,13 +19,14 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  db.collection('quotes').find().toArray((err, result) => {
+  db.collection('accidents').find().toArray((err, result) => {
     if (err) return console.log(err)
-    res.render('index.ejs', {quotes: result})
+    res.render('index.ejs', {accidents: result})
   })
 })
 
-app.post('/quotes', (req, res) => {
+/**
+app.post('/quotesquotes', (req, res) => {
   db.collection('quotes').save(req.body, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
@@ -55,3 +56,4 @@ app.delete('/quotes', (req, res) => {
     res.send('A darth vadar quote got deleted')
   })
 })
+**/

@@ -37,9 +37,13 @@ function createCollection(fileName){
     })
     .then(collection => {
         // collection resolved, insert some documents
+        const obj1 = {adresse : "paris 20 rue exemple", gravite : "grave" };
+        const obj2 = {adresse : "marseille 15 rue toto", gravite : "mortelle" };
+        const obj3 = {adresse : "nice 15 avenue gorbella", gravite : "faible" };
         const result = collection.insertMany([
-            {a : 1}, {a : 2}, {a : 3}
+            {"data" : obj1}, {"data" : obj2}, {"data" : obj3}
         ]);
+        console.log("The database has been filled !")
         return result;  // a promised insertion result
     })
     .then(() => {
@@ -88,8 +92,8 @@ function findDocuments() {
 });
 }
 
-//createCollection();
-findDocuments();
+createCollection();
+//findDocuments();
 
 /**
 function populate(err, data) {

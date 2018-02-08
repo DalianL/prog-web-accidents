@@ -2,14 +2,14 @@ html {
   font-size: 20px;
 }
 
-.quote {
+.accidents {
   margin-top: 0.5em;
 }
 
-.quote > span:first-child {
+.accidents > span:first-child {
   font-weight: bold
 }
 
-.quote > span:first-child:after {
+.accidents > span:first-child:after {
   content:':'
 }
