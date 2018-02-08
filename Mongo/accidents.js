@@ -41,9 +41,11 @@ function createCollection(fileName){
         const obj2 = {adresse : "marseille 15 rue toto", gravite : "mortelle" };
         const obj3 = {adresse : "nice 15 avenue gorbella", gravite : "faible" };
         const result = collection.insertMany([
-            {"data" : obj1}, {"data" : obj2}, {"data" : obj3}
+            {_id : 1, adresse : "paris 20 rue exemple", lat : 110, lon : 200, gravite : "grave"}, 
+            {_id : 2, adresse : "marseille 15 rue toto", lat : 110, lon : 200, gravite : "mortelle"}, 
+            {_id : 3, adresse : "nice 15 avenue gorbella", lat : 100, lon : 200, gravite : "faible"}
         ]);
-        console.log("The database has been filled !")
+        console.log("The database has been filled")
         return result;  // a promised insertion result
     })
     .then(() => {

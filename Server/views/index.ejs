@@ -11,7 +11,7 @@
   <ul class="accidents">
   <% for(var i=0; i<accidents.length; i++) { %>
     <li class="accidents">
-        <% var accident = accidents[i].data; %>
+        <% var accident = accidents[i]; %>
       <span><%= accident.adresse %> avec une gravité <%= accident.gravite %></span>
     </li>
   <% } %>

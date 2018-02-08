@@ -25,6 +25,21 @@ app.get('/', (req, res) => {
   })
 })
 
+// Get client position from client gps
+// then serve the corresponding results.
+// 
+app.get('/getRouteByPosition', function (req, res) {
+  dbquery(req.query);
+  db.collection('accidents').find( { lat : 110, lon : 200} ).toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('index.ejs', {accidents: result})
+  })
+})
+
+function dbquery(position) {
+  console.log("You requested" + position.lat + " " + position.lon);
+}
+
 /**
 app.post('/quotesquotes', (req, res) => {
   db.collection('quotes').save(req.body, (err, result) => {
