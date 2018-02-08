@@ -1,0 +1,8 @@
+{
+  "name": "ionic-angular4-client",
+  "app_id": "b17c7f71",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
