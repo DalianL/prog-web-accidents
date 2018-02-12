@@ -6,4 +6,7 @@ html {
   margin-top: 0.5em;
 }
 
+.accidents > span:first-child {
+  font-style: italic;
+}
 

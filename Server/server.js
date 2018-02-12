@@ -18,10 +18,19 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/', (req, res) => {
   db.collection('accidents').find().toArray((err, result) => {
     if (err) return console.log(err)
-    res.render('index.ejs', {accidents: result})
+    //res.render('index.ejs', {accidents: result})
+    res.send({
+      result
+    });
   })
 })
 
@@ -30,15 +39,36 @@ app.get('/', (req, res) => {
 // 
 app.get('/getRouteByPosition', function (req, res) {
   dbquery(req.query);
-  db.collection('accidents').find( { lat : 110, lon : 200} ).toArray((err, result) => {
-    if (err) return console.log(err)
-    res.render('index.ejs', {accidents: result})
+  db.collection('accidents').find( { departement:req.query.departement} ).toArray((err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    else {
+     result = filtrerByPosition(result,req.query.lat,req.query.lon,150);
+    }
+    //res.render('index.ejs', { accidents: result })
+    res.send({result});
   })
 })
 
 function dbquery(position) {
   console.log("You requested" + position.lat + " " + position.lon);
 }
+
+function filtrerByPosition(listAccident, lat, lon, rayon) {
+  var resultatAccidents = [];
+  for (var accident in listAccident) {
+    //calcul de la distance en km
+    //ACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-lon1))*6371
+    var distance = Math.acos(Math.sin(lat) * Math.sin(listAccident[accident].lat) + Math.cos(lat) * Math.cos(listAccident[accident].lat) * Math.cos(listAccident[accident].lon - lon)) * 6371
+    console.log("distance " + distance + " ,rayon " + rayon);
+    if (distance <= rayon) {
+      resultatAccidents.push(listAccident[accident]); 
+    }
+  }
+  console.log("resultatAccidents " + resultatAccidents);
+  return resultatAccidents;
+ }
 
 /**
 app.post('/quotesquotes', (req, res) => {

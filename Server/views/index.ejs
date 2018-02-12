@@ -12,7 +12,7 @@
   <% for(var i=0; i<accidents.length; i++) { %>
     <li class="accidents">
         <% var accident = accidents[i]; %>
-      <span><%= accident.adresse %> avec une gravité <%= accident.gravite %> (lat : <%= accident.lat %> / lon : <%= accident.lon %>)</span>
+      <span><%= accident.adresse %></span> avec une gravité <%= accident.gravite %> (lat : <%= accident.lat %> / lon : <%= accident.lon %>)
     </li>
   <% } %>
   </ul>
