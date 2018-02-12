@@ -12,7 +12,7 @@ const assert = require('assert');
 }());
 
 
-function createCollection(fileName) {
+function createCollection(json) {
     MongoClient.connect(url)
         .then(c => {
             // Connexion ok
@@ -42,12 +42,10 @@ function createCollection(fileName) {
                 { "data": obj1 }, { "data": obj2 }, { "data": obj3 }
             ]);
             console.log("The database has been filled !")*/
-            console.log(fileName);
-            /*var json = JSON.parse(fileName);
             console.log(json);
             const result = collection.insertMany(json);
             console.log('Donnees inserrees');
-            return result;  // a promised insertion result*/
+            return result;  // a promised insertion result
         })
         .then(() => {
             client.close();
