@@ -91,13 +91,21 @@ app.post('/addCommentary', function(req, res) {
   })
 })
 
+
+app.delete('/deleteCommentary', (req, res) => {
+  db.collection('commentary').findOneAndDelete({_id: req.body._id}, (err, result) => {
+    if (err){
+      return res.send(500, err)
+    }else{
+      res.redirect('/getCommentaryById',req.body.accidentId)
+    }
+    
+  })
+})
+
 /**
  * OTHER FUNCTIONS
  */
-
-function dbquery(position) {
-  console.log("You requested" + position.lat + " " + position.lon);
-}
 
 function filtrerByPosition(listAccident, lat, lon, rayon) {
   var resultatAccidents = [];
