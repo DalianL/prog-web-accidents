@@ -45,9 +45,9 @@ app.get('/getRouteByPosition', function (req, res) {
     }
     else {
      result = filtrerByPosition(result,req.query.lat,req.query.lon,150);
-    }
     //res.render('index.ejs', { accidents: result })
     res.send({result});
+    }
   })
 })
 
@@ -69,6 +69,18 @@ function filtrerByPosition(listAccident, lat, lon, rayon) {
   console.log("resultatAccidents " + resultatAccidents);
   return resultatAccidents;
  }
+
+ app.get('/getCommentary', function (req, res) {
+  db.collection('commentary').find().toArray((err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    else {
+      res.render('commentary.ejs', { commentary: result })
+      //res.send({result});
+    }
+  })
+})
 
 /**
 app.post('/quotesquotes', (req, res) => {

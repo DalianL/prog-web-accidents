@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ACCIDENTS APP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Accidents list in your sector</h1>
+ 
+  <ul class="accidents">
+  <% for(var i=0; i<commentary.length; i++) { %>
+    <li class="accidents">
+        <% var commentary = accidents[i]; %>
+      <span><%= commentary.adresse %></span> avec une gravité <%= commentary.gravite %> (lat : <%= accident.lat %> / lon : <%= accident.lon %>)
+    </li>
+  <% } %>
+  </ul>
+
+  <!--
+  <h2>Add a quote</h2>
+
+  <form action="/quotes" method="POST">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="quote" name="quote">
+    <button type="submit">Submit</button>
+  </form>
+
+  <div>
+    <h2>Replace last quote written by Master Yoda with a quote written by Darth Vadar</h2>
+    <button id="update"> Darth Vadar invades! </button>
+  </div>
+
+  <div>
+    <h2>Delete Darth Vadar's first quote</h2>
+    <button id="delete"> Delete first Darth Vadar quote </button>
+  </div>
+-->
+
+  <script src="main.js"></script>
+
+</body>
+</html>
