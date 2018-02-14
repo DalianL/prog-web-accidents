@@ -71,7 +71,7 @@ app.get('/getCommentary', function (req, res) {
 })
 
 app.get('/getCommentaryById', function (req, res) {
-  var accId = parseInt(req.query.accidentId,10);
+  var accId = req.query.accidentId;
   db.collection('commentary').find( {accidentId:accId} ).toArray((err, result) => {
     if (err) {
       return console.log(err);
