@@ -82,6 +82,14 @@ function filtrerByPosition(listAccident, lat, lon, rayon) {
   })
 })
 
+app.post('/addCommentary',function(req, res) {
+  db.collection('commentary').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/')
+  })
+})
+
 /**
 app.post('/quotesquotes', (req, res) => {
   db.collection('quotes').save(req.body, (err, result) => {
