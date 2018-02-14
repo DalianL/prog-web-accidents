@@ -11,27 +11,28 @@ const assert = require('assert');
     createCollection(obj);
     createCollectionCommentary();
 }());
+
+
 function createCollectionCommentary() {
     MongoClient.connect(url)
         .then(c => {
             // Connexion ok
-            client = c;
+            client2 = c;
             console.log('Connected successfully to server', url);
             const db = client.db(dbName);
             return db;
         })
         .then(db => {
-            // db resolved, drop the collection from db
-            db.dropCollection('commentary');
-            return db;
-        }, err => {
-            console.log(" " + err);
-        })
-        .then(db => {
             const collection = db.collection('commentary');
+            return collection;
+        })
+        .then(collection => {
+            const result = collection.insertMany([{"_id" : 1, "text" : "dur accident", "accidentId" : 1151516, "auteur" : "Matthieu"}]);
+            console.log('Commentary inserted successfully.');
+            return result;  // a promised insertion result
         })
         .then(() => {
-            client.close();
+            client2.close();
         })
         .catch(err => {
             console.error('Whoopsie - something gotcha...');

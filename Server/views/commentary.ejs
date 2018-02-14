@@ -6,13 +6,13 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Accidents list in your sector</h1>
+  <h1>Commentary</h1>
  
   <ul class="accidents">
   <% for(var i=0; i<commentary.length; i++) { %>
     <li class="accidents">
-        <% var commentary = accidents[i]; %>
-      <span><%= commentary.adresse %></span> avec une gravité <%= commentary.gravite %> (lat : <%= accident.lat %> / lon : <%= accident.lon %>)
+        <% var commentary = commentary[i]; %>
+      <span><%= commentary.text %></span> pour l'accident <%= commentary.accidentId %> de l'auteur <%= commentary.auteur %>
     </li>
   <% } %>
   </ul>

@@ -51,26 +51,7 @@ app.get('/getRouteByPosition', function (req, res) {
   })
 })
 
-function dbquery(position) {
-  console.log("You requested" + position.lat + " " + position.lon);
-}
-
-function filtrerByPosition(listAccident, lat, lon, rayon) {
-  var resultatAccidents = [];
-  for (var accident in listAccident) {
-    //calcul de la distance en km
-    //ACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-lon1))*6371
-    var distance = Math.acos(Math.sin(lat) * Math.sin(listAccident[accident].lat) + Math.cos(lat) * Math.cos(listAccident[accident].lat) * Math.cos(listAccident[accident].lon - lon)) * 6371
-    console.log("distance " + distance + " ,rayon " + rayon);
-    if (distance <= rayon) {
-      resultatAccidents.push(listAccident[accident]); 
-    }
-  }
-  console.log("resultatAccidents " + resultatAccidents);
-  return resultatAccidents;
- }
-
- app.get('/getCommentary', function (req, res) {
+app.get('/getCommentary', function (req, res) {
   db.collection('commentary').find().toArray((err, result) => {
     if (err) {
       return console.log(err);
@@ -89,6 +70,26 @@ app.post('/addCommentary',function(req, res) {
     res.redirect('/')
   })
 })
+
+function dbquery(position) {
+  console.log("You requested" + position.lat + " " + position.lon);
+}
+
+function filtrerByPosition(listAccident, lat, lon, rayon) {
+  var resultatAccidents = [];
+  for (var accident in listAccident) {
+    //calcul de la distance en km
+    //ACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-lon1))*6371
+    var distance = Math.acos(Math.sin(lat) * Math.sin(listAccident[accident].lat) + Math.cos(lat) * Math.cos(listAccident[accident].lat) * Math.cos(listAccident[accident].lon - lon)) * 6371
+    console.log("distance " + distance + " ,rayon " + rayon);
+    if (distance <= rayon) {
+      resultatAccidents.push(listAccident[accident]); 
+    }
+  }
+
+  console.log("resultatAccidents " + resultatAccidents);
+  return resultatAccidents;
+ }
 
 /**
 app.post('/quotesquotes', (req, res) => {
