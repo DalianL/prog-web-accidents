@@ -24,6 +24,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+/**
+ * ROUTE POSITION PART
+ */
+
 app.get('/', (req, res) => {
   db.collection('accidents').find().toArray((err, result) => {
     if (err) return console.log(err)
@@ -36,9 +40,8 @@ app.get('/', (req, res) => {
 
 // Get client position from client gps
 // then serve the corresponding results.
-// 
 app.get('/getRouteByPosition', function (req, res) {
-  dbquery(req.query);
+  //dbquery(req.query);
   db.collection('accidents').find( { departement:req.query.departement} ).toArray((err, result) => {
     if (err) {
       return console.log(err);
@@ -50,6 +53,10 @@ app.get('/getRouteByPosition', function (req, res) {
     }
   })
 })
+
+/**
+ * COMMENTARY PART
+ */
 
 app.get('/getCommentary', function (req, res) {
   db.collection('commentary').find().toArray((err, result) => {
@@ -63,13 +70,30 @@ app.get('/getCommentary', function (req, res) {
   })
 })
 
-app.post('/addCommentary',function(req, res) {
+app.get('/getCommentaryById', function (req, res) {
+  var accId = parseInt(req.query.accidentId,10);
+  db.collection('commentary').find( {accidentId:accId} ).toArray((err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    else {
+      res.render('commentary.ejs', { commentary: result })
+      //res.send({result});
+    }
+  })
+})
+
+app.post('/addCommentary', function(req, res) {
   db.collection('commentary').save(req.body, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
-    res.redirect('/')
+    res.redirect('/getCommentary')
   })
 })
+
+/**
+ * OTHER FUNCTIONS
+ */
 
 function dbquery(position) {
   console.log("You requested" + position.lat + " " + position.lon);
@@ -86,8 +110,6 @@ function filtrerByPosition(listAccident, lat, lon, rayon) {
       resultatAccidents.push(listAccident[accident]); 
     }
   }
-
-  console.log("resultatAccidents " + resultatAccidents);
   return resultatAccidents;
  }
 
