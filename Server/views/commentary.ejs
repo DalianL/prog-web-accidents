@@ -10,7 +10,6 @@
  
   <ul class="accidents">
   <% for(var i=0; i<commentary.length; i++) { %>
-    <% console.log(commentary.length) %>
     <li class="accidents">
         <% var com = commentary[i]; %>
       <span><%= com.text %></span> pour l'accident <%= com.accidentId %> de l'auteur <%= com.auteur %> et <%= com.accidentId %>

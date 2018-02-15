@@ -65,8 +65,8 @@ app.get('/getCommentary', function (req, res) {
       return console.log(err);
     }
     else {
-      res.render('commentary.ejs', { commentary: result })
-      //res.send({result});
+      //res.render('commentary.ejs', { commentary: result })
+      res.send({result});
     }
   })
 })
@@ -78,8 +78,8 @@ app.get('/getCommentaryById', function (req, res) {
       return console.log(err);
     }
     else {
-      res.render('commentary.ejs', { commentary: result })
-      //res.send({result});
+      //res.render('commentary.ejs', { commentary: result })
+      res.send({result});
     }
   })
 })
