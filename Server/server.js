@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 // then serve the corresponding results.
 app.get('/getRouteByPosition', function (req, res) {
   //dbquery(req.query);
-  db.collection('accidents').find( { departement:req.query.departement} ).toArray((err, result) => {
+  db.collection('accidents').find( {} ).toArray((err, result) => {
     if (err) {
       return console.log(err);
     }
