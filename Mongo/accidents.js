@@ -27,9 +27,9 @@ function createCollectionCommentary() {
             return collection;
         })
         .then(collection => {
-            const result = collection.insertMany([{"text" : "dur accident", "accidentId" : "201600012687", "auteur" : "Matthieu"}, 
-            {"text" : "attention passage de cerfs", "accidentId" : "201600012689", "auteur" : "Matthieu"}, 
-            {"text" : "verre sur chaussée", "accidentId" : "201600012692", "auteur" : "Matthieu"}]);
+            const result = collection.insertMany([{"text" : "Accident terrible", "accidentId" : "201600012687", "auteur" : "Matthieu"}, 
+            {"text" : "Attention passage de cerfs", "accidentId" : "201600012689", "auteur" : "Matthieu"}, 
+            {"text" : "Verre sur chaussée", "accidentId" : "201600012692", "auteur" : "Matthieu"}]);
             console.log('Commentary inserted successfully.');
             return result;  // a promised insertion result
         })
