@@ -27,7 +27,7 @@ function createCollectionCommentary() {
             return collection;
         })
         .then(collection => {
-            const result = collection.insertMany([{"_id" : 1, "text" : "dur accident", "accidentId" : "201600012687", "auteur" : "Matthieu"}]);
+            const result = collection.insertMany([{"text" : "dur accident", "accidentId" : "201600012687", "auteur" : "Matthieu"}]);
             console.log('Commentary inserted successfully.');
             return result;  // a promised insertion result
         })

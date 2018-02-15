@@ -10,9 +10,10 @@
  
   <ul class="accidents">
   <% for(var i=0; i<commentary.length; i++) { %>
+    <% console.log(commentary.length) %>
     <li class="accidents">
-        <% var commentary = commentary[i]; %>
-      <span><%= commentary.text %></span> pour l'accident <%= commentary.accidentId %> de l'auteur <%= commentary.auteur %>
+        <% var com = commentary[i]; %>
+      <span><%= com.text %></span> pour l'accident <%= com.accidentId %> de l'auteur <%= com.auteur %> et <%= com.accidentId %>
     </li>
   <% } %>
   </ul>

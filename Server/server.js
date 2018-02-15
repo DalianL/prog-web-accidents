@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
+const MongoDb = require('mongodb');
 var fs = require('fs');
 
 MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
@@ -83,21 +84,21 @@ app.get('/getCommentaryById', function (req, res) {
   })
 })
 
-app.post('/addCommentary', function(req, res) {
-  db.collection('commentary').save(req.body, (err, result) => {
+app.get('/addCommentary', function(req, res) {
+  db.collection('commentary').save(req.query, (err, result) => {
     if (err) return console.log(err)
-    console.log('saved to database')
+    console.log('saved to database', req.query)
     res.redirect('/getCommentary')
   })
 })
 
-
 app.delete('/deleteCommentary', (req, res) => {
-  db.collection('commentary').findOneAndDelete({_id: req.body._id}, (err, result) => {
+  db.collection('commentary').deleteOne({_id: new MongoDb.ObjectId(req.query.id)} , (err, result) => {
     if (err){
       return res.send(500, err)
     }else{
-      res.redirect('/getCommentaryById',req.body.accidentId)
+      res.redirect('/getCommentary');
+      console.log("Commentary", req.query.id, "suppressed successfully");
     }
     
   })
