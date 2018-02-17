@@ -18,8 +18,8 @@ Members :
 
 1. Go to the Server folder and run node server.js to start the server
 2. Enter the right adress of the server in the client ?
-3. Run the ionic client for :
+3. Run the Ionic client for :
 	- browser (simulating a mobile app) : ionic serve -l
 	- android : ionic cordova run android
 	- iOs (requires a MAC) : ionic cordova run ios
-4. Be warned by the app when accidents are nearby !
+4. Be warned by the app when accidents happened near your position !
