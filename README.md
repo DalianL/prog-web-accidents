@@ -10,7 +10,7 @@ Members :
 
 1. Clone the repository https://github.com/dl100463/prog-web-accidents
 2. Extract the client from the Client.zip file (could only be pushed as such because of Ionic's git settings)
-3. run `npm install` in the Client/ionic-angular4-client AND Server folders
+3. run `npm install` in the Client/ionic-angular4-client AND root folders
 4. run mongod --dbpath=./data in the Mongo folder
 5. In the same folder run node accidents.js Accidents.JSON to populate the database
 
