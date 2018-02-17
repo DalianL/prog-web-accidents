@@ -33,9 +33,9 @@ app.get('/', (req, res) => {
   db.collection('accidents').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', {accidents: result})
-    //res.send({
-    //  result
-    //});
+    res.send({
+      result
+    });
   })
 })
 
