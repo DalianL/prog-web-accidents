@@ -94,8 +94,8 @@ public class CSVReaderExample {
             reader = new CSVReader(new FileReader(csvFile));
             String[] line;
             String region;
-            int i = 0;
-            while (((line = reader.readNext()) != null) && ( i < 10)) {
+            int i = 1;
+            while (((line = reader.readNext()) != null) && i < 16000) {
                if(line[4].length() == 1)
             	{
             		region = "0" + line[4] + "000";
@@ -105,7 +105,7 @@ public class CSVReaderExample {
             		region = line[4] + "000";
             	}
             		
-            	GeoApiContext context = new GeoApiContext.Builder().apiKey("AIza").build();
+            	GeoApiContext context = new GeoApiContext.Builder().apiKey("AIza...").build();
                 	GeocodingResult[] results =  GeocodingApi.geocode(context, line[1] + " " + region).await();
                 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
   
@@ -120,11 +120,13 @@ public class CSVReaderExample {
                             tableau.add(obj);
                             file.write(obj.toJSONString());
                             file.write(",");
-                            System.out.println("\nGoogle Object: " + obj);
+                            //System.out.println("\nGoogle Object: " + obj);
                    }
                 i++; 
+                
+                	System.out.println(i);
+                
             }
-            file.write(tableau.toJSONString());
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
