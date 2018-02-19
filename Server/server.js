@@ -132,7 +132,7 @@ app.get('/getCommentaryById', function (req, res) {
 app.get('/addCommentary', function (req, res) {
   db.collection('commentary').save(req.query, (err, result) => {
     if (err) return console.log(err)
-    console.log('saved to database', req.query)
+    //console.log('saved to database', req.query)
     res.redirect('/getCommentary')
   })
 })
