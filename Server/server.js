@@ -122,7 +122,10 @@ function filtrerByPosition(listAccident, lat, lon, rayon) {
   }
   return resultatAccidents;
  }
-module.exports = app 
+module.exports = {
+  app,
+  filtrerByPosition
+}
 /**
 app.post('/quotesquotes', (req, res) => {
   db.collection('quotes').save(req.body, (err, result) => {
