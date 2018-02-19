@@ -18,7 +18,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^1.0.0",
-    "nodemon": "^1.8.1",
-    "mocha": "^5.0.1"
+    "nodemon": "^1.8.1"
   }
 }

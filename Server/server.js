@@ -115,7 +115,7 @@ function filtrerByPosition(listAccident, lat, lon, rayon) {
     //calcul de la distance en km
     //ACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-lon1))*6371
     var distance = Math.acos(Math.sin(lat) * Math.sin(listAccident[accident].lat) + Math.cos(lat) * Math.cos(listAccident[accident].lat) * Math.cos(listAccident[accident].lon - lon)) * 6371
-    console.log("distance " + distance + " ,rayon " + rayon);
+    //console.log("distance " + distance + " ,rayon " + rayon);
     if (distance <= rayon) {
       resultatAccidents.push(listAccident[accident]); 
     }
