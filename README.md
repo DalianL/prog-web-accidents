@@ -25,7 +25,7 @@ Members :
 4. Be warned by the app when accidents happened near your position !
 
 
-##TESTS
+## Tests
 
 1. run "npm install -g mocha@2.3.1" at the root in both repositories
 2. run "mocha" to run all the tests
