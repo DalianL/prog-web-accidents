@@ -6,21 +6,26 @@ var should = chai.should();
 chai.use(chaiHttp);
 
 
-
-it('should list ALL Commentary on /getCommentary GET', function(done) {
+describe('/GET Commentary', () => {
+it('should lists all  Commentary', function(done) {
     chai.request(server)
       .get('/getCommentary')
       .end(function(err, res){
         res.should.have.status(200);
+        res.should.be.json;
         done();
       });
   });
+});
 
-  it('should list ALL Routes on  /getRouteByPosition GET', function(done) {
+describe('/GET accident', () => {
+  it('should list all accidents', function(done) {
     chai.request(server)
       .get('/getRouteByPosition')
       .end(function(err, res){
         res.should.have.status(200);
+        res.should.be.json;
         done();
       });
   });
+});
