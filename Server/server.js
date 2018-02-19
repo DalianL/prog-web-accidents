@@ -27,6 +27,39 @@ app.use(function (req, res, next) {
 });
 
 /**
+* ADD / DELETE ACCIDENT PART
+**/
+
+// Add Accident
+app.get('/addAccident', function(req, res) {
+  db.collection('accidents').aggregate(
+    [
+      {
+        $group:
+          {
+            _id: "acId",
+            accidentId: { $max: "$accidentId" }
+          }
+      }
+    ]).toArray((err, resultAgreg) => {
+    if (err) {
+      return console.log(err);
+    }
+    else {
+     // Adresse, departement, gravite, lon, lat, accidentId
+     let newMaxId = parseInt(resultAgreg[0].accidentId) + 1;
+     db.collection('accidents').save({adresse:req.query.adresse, gravite:req.query.gravite, lon:req.query.lon, lat:req.query.lat, 
+      departement:req.query.departement,accidentId:(""+newMaxId)}, (err, result) => {
+      if (err) return console.log(err)
+      console.log('Accident saved to database with the id', ""+newMaxId);
+      res.redirect('/')
+      })
+    }
+  })
+})
+
+
+/**
  * ROUTE POSITION PART
  */
 
@@ -49,7 +82,7 @@ app.get('/getRouteByPosition', function (req, res) {
       return console.log(err);
     }
     else {
-      result = filtrerByPosition(result, req.query.lat, req.query.lon, 150);
+      result = filtrerByPosition(result, req.query.lat, req.query.lon, 5);
       //res.render('index.ejs', { accidents: result })
       res.send({ result });
     }
@@ -124,7 +157,7 @@ function filtrerByPosition(listAccident, lat, lon, rayon) {
         Math.sin(dLong / 2) * Math.sin(dLong / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var distance = (R * c)/1000; // the distance in km
-    console.log("distance " + distance + " ,rayon " + rayon);
+    //console.log("distance " + distance + " ,rayon " + rayon);
     if (distance <= rayon) {
       resultatAccidents.push(listAccident[accident]);
     }
