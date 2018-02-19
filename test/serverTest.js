@@ -1,4 +1,4 @@
-/*var chai = require('chai');
+var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../Server/server.js');
 var should = chai.should();
@@ -28,4 +28,4 @@ describe('/GET accident', () => {
         done();
       });
   });
-});*/
+});

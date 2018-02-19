@@ -58,6 +58,17 @@ app.get('/addAccident', function(req, res) {
   })
 })
 
+// Delete Accident
+app.delete('/deleteAccident', (req, res) => {
+  db.collection('commentary').deleteOne({ accidentId: req.query.id }, (err, result) => {
+    if (err) {
+      return res.send(500, err)
+    } else {
+      res.redirect('/');
+      console.log("Accident id ", req.query.accidentId, "suppressed successfully.");
+    }
+  })
+})
 
 /**
  * ROUTE POSITION PART
@@ -134,7 +145,6 @@ app.delete('/deleteCommentary', (req, res) => {
       res.redirect('/getCommentary');
       console.log("Commentary", req.query.id, "suppressed successfully");
     }
-
   })
 })
 
