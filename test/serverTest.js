@@ -14,6 +14,9 @@ describe('GET TESTING', () => {
       .end(function(err, res){
         res.should.have.status(200);
         res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('result');
+        res.body.result.should.be.a('array');
         done();
       });
   });
@@ -24,6 +27,7 @@ it('should list all  Comments', function(done) {
       .end(function(err, res){
         res.should.have.status(200);
         res.should.be.json;
+        res.body.should.be.a('object');
         done();
       });
   });

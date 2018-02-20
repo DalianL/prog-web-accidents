@@ -5,6 +5,125 @@ const MongoClient = require('mongodb').MongoClient
 const MongoDb = require('mongodb');
 var fs = require('fs');
 
+passport = require('passport')
+LocalStrategy = require('passport-local')
+var bcrypt = require('bcrypt')
+    Q = require('q')
+
+   
+   
+   
+    //used in local-signup strategy
+   /* exports.localReg = function (username, password) {
+      var deferred = Q.defer();
+      MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
+        var collection = db.collection('localUsers');
+
+        //check if username is already assigned in our database
+        collection.findOne({'username' : username})
+          .then(function (result) {
+            if (null != result) {
+              console.log("USERNAME ALREADY EXISTS:", result.username);
+              deferred.resolve(false); // username exists
+            }
+            else  {
+              var hash = bcrypt.hashSync(password, 8);
+              var user = {
+                "username": username,
+                "password": hash,
+                }
+    
+              console.log("CREATING USER:", username);
+    
+              collection.insert(user)
+                .then(function () {
+                  db.close();
+                  deferred.resolve(user);
+                });
+            }
+          });
+      });
+    
+      return deferred.promise;
+    };*/
+    
+    
+    //check if user exists
+        //if user exists check if passwords match; // true where 'hash' is password in DB)
+          //if password matches take into website
+      //if user doesn't exist or password doesn't match tell them it failed
+    exports.localAuth = function (username, password) {
+      var deferred = Q.defer();
+    
+    MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
+      var collection = db.collection('localUsers');
+    
+        collection.findOne({'username' : username})
+          .then(function (result) {
+            if (null == result) {
+              console.log("USERNAME NOT FOUND:", username);
+    
+              deferred.resolve(false);
+            }
+            else {
+              var hash = result.password;
+    
+              console.log("FOUND USER: " + result.username);
+    
+              if (bcrypt.compareSync(password, hash)) {
+                deferred.resolve(result);
+                //db = database
+                app.listen(process.env.PORT || 8000, () => {
+                  console.log('listening on 8000')
+                  console.log('results ok, ready for routing...');
+                })
+
+              } else {
+                console.log("AUTHENTICATION FAILED");
+                deferred.resolve(false);
+              }
+            }
+    
+            db.close();
+          });
+      });
+    
+      return deferred.promise;
+    }
+
+
+
+    passport.use('local-signin', new LocalStrategy(
+      {passReqToCallback : true}, //allows us to pass back the request to the callback
+      function(req, username, password, done) {
+        funct.localAuth(username, password)
+        .then(function (user) {
+          if (user) {
+            console.log("LOGGED IN AS: " + user.username);
+            req.session.success = 'You are successfully logged in ' + user.username + '!';
+            done(null, user);
+          }
+          if (!user) {
+            console.log("COULD NOT LOG IN");
+            req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
+            done(null, user);
+          }
+        })
+        .fail(function (err){
+          console.log(err.body);
+        });
+      }
+    ));
+
+
+
+
+
+
+
+
+
+
 MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
   if (err) return console.log(err)
   db = database
