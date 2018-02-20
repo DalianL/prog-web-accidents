@@ -5,91 +5,7 @@ const MongoClient = require('mongodb').MongoClient
 const MongoDb = require('mongodb');
 var fs = require('fs');
 
-passport = require('passport')
-LocalStrategy = require('passport-local')
-var bcrypt = require('bcrypt')
-    Q = require('q')
-
     
-    
-    //check if user exists
-        //if user exists check if passwords match; // true where 'hash' is password in DB)
-          //if password matches take into website
-      //if user doesn't exist or password doesn't match tell them it failed
-
-
-
-    /*exports.localAuth = function (username, password) {
-      var deferred = Q.defer();
-    
-    MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
-      var collection = db.collection('localUsers');
-    
-        collection.findOne({'username' : username})
-          .then(function (result) {
-            if (null == result) {
-              console.log("USERNAME NOT FOUND:", username);
-    
-              deferred.resolve(false);
-            }
-            else {
-              var hash = result.password;
-    
-              console.log("FOUND USER: " + result.username);
-    
-              if (bcrypt.compareSync(password, hash)) {
-                deferred.resolve(result);
-                //db = database
-                app.listen(process.env.PORT || 8000, () => {
-                  console.log('listening on 8000')
-                  console.log('results ok, ready for routing...');
-                })
-
-              } else {
-                console.log("AUTHENTICATION FAILED");
-                deferred.resolve(false);
-              }
-            }
-    
-            db.close();
-          });
-      });
-    
-      return deferred.promise;
-    }
-
-
-
-    passport.use('local-signin', new LocalStrategy(
-      {passReqToCallback : true}, //allows us to pass back the request to the callback
-      function(req, username, password, done) {
-        funct.localAuth(username, password)
-        .then(function (user) {
-          if (user) {
-            console.log("LOGGED IN AS: " + user.username);
-            req.session.success = 'You are successfully logged in ' + user.username + '!';
-            done(null, user);
-          }
-          if (!user) {
-            console.log("COULD NOT LOG IN");
-            req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
-            done(null, user);
-          }
-        })
-        .fail(function (err){
-          console.log(err.body);
-        });
-      }
-    ));*/
-
-
-
-
-
-
-
-
-
 
 MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
   if (err) return console.log(err)
@@ -110,6 +26,27 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
   next();
 });
+
+
+  //check if manger exists
+        //if manger exists return autorise;
+      //if user doesn't exist or password doesn't exit return non 
+
+app.get('/authen', (req, res) => {
+  db.collection('mangers').findOne({username:req.query.username,password:req.query.password}, (err, result) => {
+    if (err) {
+      return res.send(500, err)
+    } else if (null == result) {
+      //console.log("USERNAME NOT FOUND:", req.query.username);
+      res.send('non');
+    }else{
+      //console.log("USERNAME FOUND:", req.query.username);
+      res.send('Autorise');
+    }
+  })
+})
+
+
 
 /**
 * ADD / DELETE ACCIDENT PART
@@ -141,6 +78,9 @@ app.get('/addAccident', function(req, res) {
     }
   })
 })
+
+
+
 
 // Delete Accident
 app.delete('/deleteAccident', (req, res) => {

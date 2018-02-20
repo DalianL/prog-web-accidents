@@ -10,7 +10,39 @@ const assert = require('assert');
     var obj = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
     createCollection(obj);
     createCollectionCommentary();
+    CollectionManger();
 }());
+
+
+
+function CollectionManger() {
+    MongoClient.connect(url)
+        .then(c => {
+            // Connexion ok
+            cl = c;
+            console.log('Connected successfully to server', url);
+            const db = cl.db(dbName);
+            return db;
+        })
+        .then(db => {
+            const collection = db.collection('mangers');
+            return collection;
+        })
+        .then(collection => {
+            const result = collection.insertMany([{"username" : "cheik", "password" : "04217632"}, 
+            {"username" : "Ahmed", "password" : "12345678"}]);
+            console.log('manager inserted successfully.');
+            return result;  // a promised insertion result
+        })
+        .then(() => {
+            cl.close();
+        })
+        .catch(err => {
+            console.error('Whoopsie - something gotcha...');
+            console.error(err);
+        });
+}
+
 
 
 function createCollectionCommentary() {
