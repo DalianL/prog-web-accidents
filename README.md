@@ -32,5 +32,5 @@ Members :
 
 ## Tests
 
-1. run `npm install -g mocha@2.3.1` at the root in this repository
+1. run `npm install -g mocha` at the root in this repository
 2. run `mocha` to run all the tests
