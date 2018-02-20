@@ -28,23 +28,24 @@
 
 1. Go to the Server folder and run node server.js to start the server
 2. Start the client by following these steps with a CLI, depending on the platform you want to run the app with :
-   + Browser (simulating the mobile app) :
+   + *Browser* (simulating the mobile app) :
       - In the client repository, run `ionic serve -l`
-   + Android :
-      - Connect yourself to any WIFI you can have access to
-      - Run `ipconfig` anywhere with a CLI to get your IP address; memorize or write down the IPv4 address line
+   + *Android* :
+      - Connect your computer to any WIFI you can have access to
+      - Run `ipconfig` anywhere with a CLI to get your IP addresses; memorize or write down the IPv4 address line
       - In the src/providers/rest/rest.ts file, replace the “localhost” part in the urlBase variable (top of the file) with the memorized IP address
       - Connect your Android phone to your computer via USB
       - Connect your Android phone to the same WIFI as your computer
+      - Activate localization on your Android phone
       - Run `ionic cordova run android`
-   + iOs (requires a Mac to launch from) :
+   + *iOs* (requires a Mac to launch from) :
       - Do the same as above until the very last line
       - Run `ionic cordova run ios` (not tested as it requires a MAC)
 3. Connect as a Normal account or a Manager account with the following credentials :
-   + Normal account :
+   + *Normal account* :
       - Username : User
       - Password : pass
-   + Manager account :
+   + *Manager account* :
       - Username : Manager
       - Password : pass
 4. On start-up make sure to authorize the app to detect your position
@@ -85,7 +86,7 @@ Can connect as a normal account or special account, then for :
 
 ### Client-side
 
-- Running properly the first time : somehow the application doesn’t function properly the first time the map is loaded even after having tried a few ways to fix it. As such for the client to run properly, it is necessary to connect as either account once and after the map has been loaded, log out with the button at the bottom of the screen (slide/scroll down to reach it). After having done that once the client will work just fine.
+- Running properly the first time : somehow the application doesn’t function properly the first time the map is loaded even after having tried a few ways to fix it. As such for the client to run properly, it is necessary to connect as any account once and after the map has been loaded, log out with the button at the bottom of the screen (slide/scroll down to reach it). After having done that once the client will work just fine.
 - Having a new accident display on the map immediately : when adding a new accident with the manager account, the new accident doesn’t appear on the map even though the accident data is reloaded. A workaround to that is simply to logout and log back in to see the new accident.
 
 ## Tests
