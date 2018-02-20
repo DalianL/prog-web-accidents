@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Check if manager exists
+//check if manager exists
 app.get('/authen', (req, res) => {
   db.collection('managers').findOne({username:req.query.username,password:req.query.password}, (err, result) => {
     if (err) {
@@ -144,7 +144,7 @@ app.get('/getCommentaryById', function (req, res) {
 app.get('/addCommentary', function (req, res) {
   db.collection('commentary').save(req.query, (err, result) => {
     if (err) return console.log(err)
-    console.log('New commentary saved to database');
+    //console.log('New commentary saved to database');
     res.redirect('/getCommentary')
   })
 })
@@ -155,7 +155,7 @@ app.delete('/deleteCommentary', (req, res) => {
       return res.send(500, err)
     } else {
       res.redirect('/getCommentary');
-      console.log("Commentary", req.query.id, "suppressed successfully");
+      //console.log("Commentary", req.query.id, "suppressed successfully");
     }
   })
 })
