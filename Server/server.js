@@ -27,26 +27,18 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-  //check if manger exists
-        //if manger exists return autorise;
-      //if user doesn't exist or password doesn't exit return non 
-
+// Check if manager exists
 app.get('/authen', (req, res) => {
   db.collection('managers').findOne({username:req.query.username,password:req.query.password}, (err, result) => {
     if (err) {
       return res.send(500, err)
-    } else if (null == result) {
-      //console.log("USERNAME NOT FOUND:", req.query.username);
-      res.send('non');
+    } else if (result == null) {
+      res.send('Unauthorized');
     }else{
-      //console.log("USERNAME FOUND:", req.query.username);
-      res.send('Autorise');
+      res.send('Authorized');
     }
   })
 })
-
-
 
 /**
 * ADD / DELETE ACCIDENT PART
@@ -78,9 +70,6 @@ app.get('/addAccident', function(req, res) {
     }
   })
 })
-
-
-
 
 // Delete Accident
 app.delete('/deleteAccident', (req, res) => {

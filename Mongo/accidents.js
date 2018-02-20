@@ -6,21 +6,18 @@ const assert = require('assert');
 
 (function main() {
     console.info('populating db with department and region data...');
-    //fs.readFile(process.argv[2], createCollection);//rempli la base de données
     var obj = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
     createCollection(obj);
+    console.info('Insert commentary and managers informations...');
     createCollectionCommentary();
     CollectionManger();
 }());
-
-
 
 function CollectionManger() {
     MongoClient.connect(url)
         .then(c => {
             // Connexion ok
             cl = c;
-            console.log('Connected successfully to server', url);
             const db = cl.db(dbName);
             return db;
         })
@@ -29,9 +26,9 @@ function CollectionManger() {
             return collection;
         })
         .then(collection => {
-            const result = collection.insertMany([{"username" : "cheik", "password" : "04217632"}, 
-            {"username" : "Ahmed", "password" : "12345678"}]);
-            console.log('manager inserted successfully.');
+            const result = collection.insertMany([{"username" : "Manager", "password" : "pass"}, 
+            {"username" : "Ahmed", "password" : "pass"}]);
+            console.log('Manager inserted successfully.');
             return result;  // a promised insertion result
         })
         .then(() => {
@@ -44,13 +41,11 @@ function CollectionManger() {
 }
 
 
-
 function createCollectionCommentary() {
     MongoClient.connect(url)
         .then(c => {
             // Connexion ok
             client2 = c;
-            console.log('Connected successfully to server', url);
             const db = client.db(dbName);
             return db;
         })
@@ -79,7 +74,6 @@ function createCollection(json) {
         .then(c => {
             // Connexion ok
             client = c;
-            console.log('Connected successfully to server', url);
             const db = client.db(dbName);
             return db;
         })
@@ -97,7 +91,7 @@ function createCollection(json) {
         .then(collection => {
             console.log(json);
             const result = collection.insertMany(json);
-            console.log('Donnees inserrees');
+            console.log('Donnees inserees');
             return result;  // a promised insertion result
         })
         .then(() => {
