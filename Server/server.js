@@ -10,49 +10,16 @@ LocalStrategy = require('passport-local')
 var bcrypt = require('bcrypt')
     Q = require('q')
 
-   
-   
-   
-    //used in local-signup strategy
-   /* exports.localReg = function (username, password) {
-      var deferred = Q.defer();
-      MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
-        var collection = db.collection('localUsers');
-
-        //check if username is already assigned in our database
-        collection.findOne({'username' : username})
-          .then(function (result) {
-            if (null != result) {
-              console.log("USERNAME ALREADY EXISTS:", result.username);
-              deferred.resolve(false); // username exists
-            }
-            else  {
-              var hash = bcrypt.hashSync(password, 8);
-              var user = {
-                "username": username,
-                "password": hash,
-                }
-    
-              console.log("CREATING USER:", username);
-    
-              collection.insert(user)
-                .then(function () {
-                  db.close();
-                  deferred.resolve(user);
-                });
-            }
-          });
-      });
-    
-      return deferred.promise;
-    };*/
     
     
     //check if user exists
         //if user exists check if passwords match; // true where 'hash' is password in DB)
           //if password matches take into website
       //if user doesn't exist or password doesn't match tell them it failed
-    exports.localAuth = function (username, password) {
+
+
+
+    /*exports.localAuth = function (username, password) {
       var deferred = Q.defer();
     
     MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
@@ -113,7 +80,7 @@ var bcrypt = require('bcrypt')
           console.log(err.body);
         });
       }
-    ));
+    ));*/
 
 
 
