@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
       //if user doesn't exist or password doesn't exit return non 
 
 app.get('/authen', (req, res) => {
-  db.collection('mangers').findOne({username:req.query.username,password:req.query.password}, (err, result) => {
+  db.collection('managers').findOne({username:req.query.username,password:req.query.password}, (err, result) => {
     if (err) {
       return res.send(500, err)
     } else if (null == result) {

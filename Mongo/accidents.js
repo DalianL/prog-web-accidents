@@ -25,7 +25,7 @@ function CollectionManger() {
             return db;
         })
         .then(db => {
-            const collection = db.collection('mangers');
+            const collection = db.collection('managers');
             return collection;
         })
         .then(collection => {
