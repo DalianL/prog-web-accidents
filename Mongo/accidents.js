@@ -10,10 +10,10 @@ const assert = require('assert');
     createCollection(obj);
     console.info('Insert commentary and managers informations...');
     createCollectionCommentary();
-    CollectionManger();
+    CollectionManager();
 }());
 
-function CollectionManger() {
+function CollectionManager() {
     MongoClient.connect(url)
         .then(c => {
             // Connexion ok
