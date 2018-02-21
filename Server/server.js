@@ -5,8 +5,6 @@ const MongoClient = require('mongodb').MongoClient
 const MongoDb = require('mongodb');
 var fs = require('fs');
 
-    
-
 MongoClient.connect('mongodb://localhost:27017/accidentprojet', (err, database) => {
   if (err) return console.log(err)
   db = database

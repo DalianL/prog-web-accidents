@@ -2,11 +2,11 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../Server/server.js');
 var should = chai.should();
-
 chai.use(chaiHttp);
-describe('GET TESTING', () => {
 
-  it('authenfication of the @GIVEN manager,should return Unauthorized ', function(done) {
+
+describe('Tests on accidents / managers and commentaries', () => {
+  it('Authenfication of the @GIVEN manager,should return Unauthorized ', function(done) {
     chai.request(server.app)
       .get('/authen?username='+'Manager'+'&password='+'Manager')
       .end(function(err, res){
@@ -16,7 +16,7 @@ describe('GET TESTING', () => {
       });
   });
 
-  it('authenfication of the @GIVEN manager,should return Authorized ', function(done) {
+  it('Authenfication of the @GIVEN manager, should return Authorized', function(done) {
     chai.request(server.app)
       .get('/authen?username='+'Ahmed'+'&password='+'pass')
       .end(function(err, res){
@@ -26,7 +26,7 @@ describe('GET TESTING', () => {
       });
   });
 
-  it('should list all accidents ', function(done) {
+  it('Should list all accidents', function(done) {
     chai.request(server.app)
       .get('/')
       .end(function(err, res){
@@ -39,7 +39,7 @@ describe('GET TESTING', () => {
       });
   });
 
-it('should list all comments', function(done) {
+it('Should list all comments', function(done) {
     chai.request(server.app)
       .get('/getCommentary')
       .end(function(err, res){
@@ -50,7 +50,7 @@ it('should list all comments', function(done) {
       });
   });
 
-  it('should return all accident around the @GIVEN position', function(done) {
+  it('Should return all accident around the @GIVEN position', function(done) {
     chai.request(server.app)
       .get('/getRouteByPosition?lat='+'50.6371469802915'+'&lon='+'3.060621980291502')
       .end(function(err, res){
@@ -71,7 +71,7 @@ it('should list all comments', function(done) {
       });
   });
 
-  it('should add a comment about the @GIVEN accident', function(done) {
+  it('Should add a comment about the @GIVEN accident', function(done) {
     chai.request(server.app)
       .get('/addCommentary?text='+'blablabla'+'&accidentId='+'201600000049'+'&auteur='+ 'Ahmed')
       .end(function(err, res){
@@ -91,7 +91,7 @@ it('should list all comments', function(done) {
       });
   });
 
-  it('should return  all comments about the @GIVEN accident', function(done) {
+  it('Should return all comments about the @GIVEN accident', function(done) {
     chai.request(server.app)
       .get('/getCommentaryById?accidentId='+'201600000049')
       .end(function(err, res){
